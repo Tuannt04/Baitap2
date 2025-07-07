@@ -89,15 +89,15 @@ const updateRealtime = () => {
     date = new Date();
     currYear = date.getFullYear();
     currMonth = date.getMonth();
-    if (!isYearView && !isDecadeView && (date.getDate() !== new Date().getDate() || date.getMonth() !== new Date().getMonth() || date.getFullYear() !== new Date().getFullYear())) {
-        renderCalendar();
-    }
+    timeValue.textContent = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+    renderCalendar();
 }
 
-setInterval(updateRealtime, 60000);
+setInterval(updateRealtime, 10000);
 
 daysTag.addEventListener("click", (e) => {
     const dayElement = e.target.closest("li");
+    if (dayElement && !dayElement.classList.contains("inactive")) {
         if (isDecadeView) {
             const year = parseInt(dayElement.getAttribute("data-year"));
             currYear = year;
@@ -127,7 +127,7 @@ daysTag.addEventListener("click", (e) => {
             renderCalendar();
         }
     }
-);
+});
 
 monthYear.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -194,4 +194,3 @@ dropdownIcon.addEventListener("click", () => {
     // Cập nhật icon tương ứng
     img.src = isExpanded ? "chevron_up.png" : "chevron_down.png";
 });
-
