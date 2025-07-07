@@ -21,6 +21,8 @@ const { monthsShort, monthsFull, daysFull } = window.calendarData;
 const renderCalendar = (direction = null) => {
     let liTag = "";
     const weeks = document.querySelector(".weeks");
+    const today = new Date(); // Ngày hiện tại để so sánh
+
     if (isDecadeView) {
         daysTag.classList.add("decade-view");
         daysTag.classList.remove("month-view", "year-view");
@@ -32,7 +34,6 @@ const renderCalendar = (direction = null) => {
             liTag += `<li class="${isCurrentYear} ${isInactive}" data-year="${i}">${i}</li>`;
         }
         monthYear.innerText = `${startYear} - ${startYear + 9}`;
-        currentDate.innerText = `${daysFull[date.getDay()]}, ${date.getDate()} ${monthsFull[currMonth]} ${currYear}`;
     } else if (isYearView) {
         daysTag.classList.add("year-view");
         daysTag.classList.remove("month-view", "decade-view");
@@ -45,7 +46,6 @@ const renderCalendar = (direction = null) => {
             liTag += `<li class="inactive" data-month="${i}">${monthsShort[i]}</li>`;
         }
         monthYear.innerText = `${currYear}`;
-        currentDate.innerText = `${daysFull[date.getDay()]}, ${date.getDate()} ${monthsFull[currMonth]} ${currYear}`;
     } else {
         daysTag.classList.add("month-view");
         daysTag.classList.remove("year-view", "decade-view");
@@ -61,8 +61,8 @@ const renderCalendar = (direction = null) => {
         }
 
         for (let i = 1; i <= lastDateofMonth; i++) {
-            let isToday = i === date.getDate() && currMonth === date.getMonth() 
-                         && currYear === date.getFullYear() ? "active" : "";
+            let isToday = i === today.getDate() && currMonth === today.getMonth() 
+                         && currYear === today.getFullYear() ? "active" : "";
             let isSelected = selectedDate && selectedDate.getDate() === i && selectedDate.getMonth() === currMonth && selectedDate.getFullYear() === currYear ? "selected" : "";
             liTag += `<li class="${isToday} ${isSelected}" data-date="${i}">${i}</li>`;
         }
@@ -73,8 +73,10 @@ const renderCalendar = (direction = null) => {
         }
 
         monthYear.innerText = `${monthsShort[currMonth]} ${currYear}`;
-        currentDate.innerText = `${daysFull[date.getDay()]}, ${date.getDate()} ${monthsFull[currMonth]} ${currYear}`;
     }
+    
+    // Hiển thị ngày hiện tại theo thời gian thực trong header
+    currentDate.innerText = `${daysFull[today.getDay()]}, ${today.getDate()} ${monthsFull[today.getMonth()]} ${today.getFullYear()}`;
     
     daysTag.innerHTML = liTag;
     if (direction) {
@@ -160,11 +162,9 @@ prevNextIcon.forEach(icon => {
         } else {
             currMonth = icon.id === "prev" ? currMonth - 1 : currMonth + 1;
             if (currMonth < 0 || currMonth > 11) {
-                date = new Date(currYear, currMonth, date.getDate());
+                date = new Date(currYear, currMonth, 1);
                 currYear = date.getFullYear();
                 currMonth = date.getMonth();
-            } else {
-                date = new Date(currYear, currMonth, date.getDate());
             }
             selectedDate = null;
             renderCalendar(icon.id);
@@ -172,25 +172,27 @@ prevNextIcon.forEach(icon => {
     });
 });
 
-decreaseBtn.addEventListener("click", () => {
-    if (currentTime > 5) {
-        currentTime -= 5;
+if (decreaseBtn) {
+    decreaseBtn.addEventListener("click", () => {
+        if (currentTime > 5) {
+            currentTime -= 5;
+            timeValue.textContent = currentTime;
+        }
+    });
+}
+
+if (increaseBtn) {
+    increaseBtn.addEventListener("click", () => {
+        currentTime += 15;
         timeValue.textContent = currentTime;
-    }
-});
+    });
+}
 
-increaseBtn.addEventListener("click", () => {
-    currentTime += 15;
-    timeValue.textContent = currentTime;
-});
-
-dropdownIcon.addEventListener("click", () => {
-    const img = dropdownIcon.querySelector("img");
-    const isExpanded = wrapper.dataset.state === "expanded";
-
-    // Cập nhật trạng thái wrapper
-    wrapper.dataset.state = isExpanded ? "collapsed" : "expanded";
-
-    // Cập nhật icon tương ứng
-    img.src = isExpanded ? "chevron_up.png" : "chevron_down.png";
-});
+if (dropdownIcon) {
+    dropdownIcon.addEventListener("click", () => {
+        const img = dropdownIcon.querySelector("img");
+        const isExpanded = wrapper.dataset.state === "expanded";
+        wrapper.dataset.state = isExpanded ? "collapsed" : "expanded";
+        img.src = isExpanded ? "./assets/chevron_up.png" : "./assets/chevron_down.png";
+    });
+}
