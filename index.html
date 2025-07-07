@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper" data-current-year="2025" data-current-month="6" data-current-time="30">
+        <header>
+            <p class="current-date">
+                <span class="day-name">Sunday, 6 July 2025</span>
+            </p>
+            <div class="dropdown-icon">
+                <img data-state="collapsed" src="/assets/chevron_down.png" alt="Toggle Calendar">
+            </div>
+        </header>
+        <div class="nav-controls">
+            <p class="month-year" id="monthYear">Jul 2025</p>
+            <div class="icons">
+                <div class="caret-icon">
+                    <img id="prev" src="/assets/caret-up-solid.svg" alt="Previous">
+                </div>
+                <div class="caret-icon">
+                    <img id="next" src="/assets/caret-down-solid.svg" alt="Next">
+                </div>
+            </div>
+        </div>
+        <div class="calendar">
+            <ul class="weeks">
+                <li>Su</li>
+                <li>Mo</li>
+                <li>Tu</li>
+                <li>We</li>
+                <li>Th</li>
+                <li>Fr</li>
+                <li>Sa</li>
+            </ul>
+            <ul class="days month-view">
+                <li class="inactive">29</li>
+                <li class="inactive">30</li>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li class="active">6</li>
+                <li>7</li>
+                <li>8</li>
+                <li>9</li>
+                <li>10</li>
+                <li>11</li>
+                <li>12</li>
+                <li>13</li>
+                <li>14</li>
+                <li>15</li>
+                <li>16</li>
+                <li>17</li>
+                <li>18</li>
+                <li>19</li>
+                <li>20</li>
+                <li>21</li>
+                <li>22</li>
+                <li>23</li>
+                <li>24</li>
+                <li>25</li>
+                <li>26</li>
+                <li>27</li>
+                <li>28</li>
+                <li>29</li>
+                <li>30</li>
+                <li>31</li>
+                <li class="inactive">1</li>
+                <li class="inactive">2</li>
+            </ul>
+        </div>
+        <div class="time-controls">
+            <div class="time-left">
+                <button id="decrease">-</button>
+                <span class="time-value">30</span>mins
+                <button id="increase">+</button>
+            </div>
+            <button class="focus-btn">▶ Focus</button>
+        </div>
+    </div>
+
+    <script>
+        window.calendarData = {
+            monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            monthsFull: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+            daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+            daysFull: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+        };
+    </script>
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+/* Nhập font và thiết lập cơ bản */
+@import url('https://fonts.googleapis.com/css2?family=Segoe UI:wght@400;500;600&display=fallback');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Bố cục chính */
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #f0f0f0;
+}
+
+/* Container lịch */
+.wrapper {
+    width: 350px;
+    background: #252526;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    color: #d4d4d4;
+}
+
+/* Header */
+.wrapper header {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    justify-content: space-between;
+    background: #1e1e1e;
+    border-bottom: 1px solid #3c3c3c;
+}
+header .current-date {
+    font-size: 1rem;
+}
+header .current-date .day-name {
+    font-weight: 400;
+    display: block;
+    cursor: pointer;
+}
+header .current-date .day-name:hover {
+    color: #bbb;
+}
+header .dropdown-icon {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ffffff; /* Viền trắng như bạn yêu cầu */
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: white; /* Nền đen theo yêu cầu trước */
+    display: flex; /* Căn giữa */
+    align-items: center; /* Căn dọc */
+    justify-content: center; /* Căn ngang */
+    object-fit: contain;
+}
+header .dropdown-icon img {
+    width: 32px; /* Điều chỉnh để khớp với container, thay vì 25px */
+    height: 32px; /* Điều chỉnh để khớp với container */
+    object-fit: contain; /* Đảm bảo hình ảnh hiển thị đầy đủ */
+}
+header .dropdown-icon:hover {
+    opacity: 0.7; /* Hiệu ứng mờ khi hover */
+}
+
+/* Điều hướng */
+.nav-controls {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 15px;
+    background: #252526;
+}
+.nav-controls .month-year {
+    font-size: 1.0rem;
+    font-weight: 600;
+    color: #bbb;
+}
+.nav-controls .icons {
+    display: flex;
+    align-items: center;
+    gap: 4px; /* Khoảng cách giữa các nút */
+}
+.nav-controls .icons .caret-icon {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #3c3c3c;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: #000000; /* Nền đen cho container */
+    display: flex;
+    align-items: center; /* Căn dọc */
+    justify-content: center; /* Căn ngang */
+}
+.nav-controls .icons .caret-icon img {
+    width: 10px;
+    height: 10px;
+    object-fit: contain;
+    filter: brightness(0) invert(1); /* Đảo màu hình ảnh thành trắng */
+}
+.nav-controls .icons .caret-icon:hover {
+    opacity: 0.7; /* Hiệu ứng mờ khi hover */
+}
+
+/* Container lịch */
+.calendar {
+    padding: 10px;
+    background: #252526;
+    overflow: hidden;
+    max-height: 280px;
+    position: relative;
+}
+.calendar ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    text-align: center;
+}
+
+/* Ngày trong tuần */
+.calendar .weeks li {
+    width: calc(100% / 7);
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 4px 0;
+    color: #bbb;
+}
+
+/* Danh sách ngày/tháng */
+.calendar .days {
+    position: relative;
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+.calendar .days li {
+    width: calc(100% / 7);
+    font-size: 0.9rem;
+    padding: 6px 0;
+    cursor: pointer;
+    position: relative;
+}
+.days li.clicked {
+    border: 2px solid #0078d4;
+    color: #0078d4;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.days li.inactive {
+    color: #666;
+}
+
+.days li.active {
+    background: #0078d4;
+    color: #fff;
+    border-radius: 50%;
+}
+.days li.selected {
+    border: 2px solid #0078d4;
+    color: #0078d4;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background: transparent;
+}
+
+.days li.inactive.selected {
+    border: 2px solid #0078d4;
+    color: #0078d4;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background: transparent;
+}
+/* Chế độ month-view */
+.calendar .days.month-view {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    background: #252526;
+    overflow: hidden;
+}
+.days.month-view li {
+    flex: 0 0 calc(100% / 7 - 1px);
+    aspect-ratio: 1 / 1;
+    font-size: 0.9rem;
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5px;
+    transition: all 0.2s ease;
+}
+
+/* Chế độ year-view */
+.calendar .days.year-view {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    background: #252526;
+    overflow: hidden;
+}
+.days.year-view li {
+    flex: 0 0 calc(100% / 4 - 2px);
+    aspect-ratio: 1 / 1;
+    font-size: 0.9rem;
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1px;
+    transition: all 0.2s ease;
+}
+.days li:not(.active):hover {
+    background: #333;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+/* Chế độ decade-view */
+.calendar .days.decade-view {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    background: #252526;
+    overflow: hidden;
+}
+.days.decade-view li {
+    flex: 0 0 calc(100% / 4 - 2px);
+    aspect-ratio: 1 / 1;
+    font-size: 0.9rem;
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1px;
+    transition: all 0.2s ease;
+}
+.days.decade-view li.active {
+    background: #0078d4;
+    color: #fff;
+    border-radius: 50%;
+}
+.days.decade-view li:hover:not(.active) {
+    background: #333;
+    border-radius: 50%;
+}
+
+/* Điều khiển thời gian */
+.time-controls {
+    display: flex;
+    justify-content: space-between; /* Đặt hai phần ở hai đầu */
+    padding: 8px;
+    background: #1e1e1e;
+    border-top: 1px solid #333;
+}
+.time-controls .time-left {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Khoảng cách giữa - và 30 mins */
+}
+.time-controls button {
+    background: #333;
+    color: #d4d4d4;
+    border: none;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 0.9rem;
+}
+.time-controls button:hover {
+    background: #444;
+}
+
+/* Hiệu ứng trượt */
+.days.slide-up {
+    transform: translateY(-100%);
+}
+.days.slide-down {
+    transform: translateY(100%);
+}
+.days.slide-reset {
+    transform: translateY(0);
+}
+
+/* Ẩn lịch khi thu gọn */
+.wrapper[data-state="collapsed"] .calendar,
+.wrapper[data-state="collapsed"] .nav-controls {
+    display: none;
+}
