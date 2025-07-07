@@ -191,5 +191,5 @@ dropdownIcon.addEventListener("click", () => {
     wrapper.dataset.state = isCollapsed ? "expanded" : "collapsed";
     dropdownIcon.dataset.state = isCollapsed ? "expanded" : "collapsed";
 
-    img.src = isCollapsed ? "chevron_up.png" : "chevron_down.png";
+    img.src = isCollapsed ? "chevron_down.png" : "chevron_up.png";
 });
