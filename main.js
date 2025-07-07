@@ -186,10 +186,12 @@ increaseBtn.addEventListener("click", () => {
 
 dropdownIcon.addEventListener("click", () => {
     const img = dropdownIcon.querySelector("img");
-    const isCollapsed = wrapper.dataset.state === "collapsed";
+    const isExpanded = wrapper.dataset.state === "expanded";
 
-    wrapper.dataset.state = isCollapsed ? "expanded" : "collapsed";
-    dropdownIcon.dataset.state = isCollapsed ? "expanded" : "collapsed";
+    // Cập nhật trạng thái wrapper
+    wrapper.dataset.state = isExpanded ? "collapsed" : "expanded";
 
-    img.src = isCollapsed ? "chevron_down.png" : "chevron_up.png";
+    // Cập nhật icon tương ứng
+    img.src = isExpanded ? "chevron_up.png" : "chevron_down.png";
 });
+
