@@ -75,10 +75,12 @@ const renderCalendar = (direction = null) => {
         monthYear.innerText = `${monthsShort[currMonth]} ${currYear}`;
     }
     
-    // Hiển thị ngày hiện tại theo thời gian thực trong header
+    // Hiển thị ngày hiện tại theo thời gian thực trong header (chỉ ngày, tháng, năm)
     currentDate.innerText = `${daysFull[today.getDay()]}, ${today.getDate()} ${monthsFull[today.getMonth()]} ${today.getFullYear()}`;
     
     daysTag.innerHTML = liTag;
+    // Đảm bảo timeValue hiển thị số phút từ currentTime
+    timeValue.textContent = `${currentTime} mins`;
     if (direction) {
         daysTag.classList.add(direction === "prev" ? "slide-down" : "slide-up");
         setTimeout(() => {
@@ -91,11 +93,10 @@ const updateRealtime = () => {
     date = new Date();
     currYear = date.getFullYear();
     currMonth = date.getMonth();
-    timeValue.textContent = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
     renderCalendar();
 }
 
-setInterval(updateRealtime, 1000);
+setInterval(updateRealtime, 10000);
 
 daysTag.addEventListener("click", (e) => {
     const dayElement = e.target.closest("li");
@@ -176,7 +177,7 @@ if (decreaseBtn) {
     decreaseBtn.addEventListener("click", () => {
         if (currentTime > 5) {
             currentTime -= 5;
-            timeValue.textContent = currentTime;
+            timeValue.textContent = `${currentTime} mins`;
         }
     });
 }
@@ -184,7 +185,7 @@ if (decreaseBtn) {
 if (increaseBtn) {
     increaseBtn.addEventListener("click", () => {
         currentTime += 15;
-        timeValue.textContent = currentTime;
+        timeValue.textContent = `${currentTime} mins`;
     });
 }
 
