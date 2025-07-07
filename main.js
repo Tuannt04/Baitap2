@@ -185,7 +185,11 @@ increaseBtn.addEventListener("click", () => {
 });
 
 dropdownIcon.addEventListener("click", () => {
+    const img = dropdownIcon.querySelector("img");
     const isCollapsed = wrapper.dataset.state === "collapsed";
+
     wrapper.dataset.state = isCollapsed ? "expanded" : "collapsed";
     dropdownIcon.dataset.state = isCollapsed ? "expanded" : "collapsed";
+
+    img.src = isCollapsed ? "chevron_up.png" : "chevron_down.png";
 });
