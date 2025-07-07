@@ -109,7 +109,7 @@ header .dropdown-icon:hover {
     padding: 10px;
     background: #252526;
     overflow: hidden;
-    max-height: 280px;
+    max-height: 300px;
     position: relative;
 }
 .calendar ul {
