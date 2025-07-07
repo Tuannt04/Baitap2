@@ -177,7 +177,7 @@ if (decreaseBtn) {
     decreaseBtn.addEventListener("click", () => {
         if (currentTime > 5) {
             currentTime -= 5;
-            timeValue.textContent = `${currentTime} mins`;
+            timeValue.textContent = `${currentTime}`;
         }
     });
 }
@@ -185,7 +185,7 @@ if (decreaseBtn) {
 if (increaseBtn) {
     increaseBtn.addEventListener("click", () => {
         currentTime += 15;
-        timeValue.textContent = `${currentTime} mins`;
+        timeValue.textContent = `${currentTime}`;
     });
 }
 
