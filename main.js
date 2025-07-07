@@ -95,7 +95,7 @@ const updateRealtime = () => {
     renderCalendar();
 }
 
-setInterval(updateRealtime, 10000);
+setInterval(updateRealtime, 1000);
 
 daysTag.addEventListener("click", (e) => {
     const dayElement = e.target.closest("li");
