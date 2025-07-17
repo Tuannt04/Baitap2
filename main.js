@@ -255,7 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const isExpanded = wrapper.dataset.state === "expanded";
 
         wrapper.dataset.state = isExpanded ? "collapsed" : "expanded";
-        img.src = isExpanded ? "./assets/chevron_up.png" : "./assets/chevron_down.png";
+        img.src = isExpanded ? "chevron_up.png" : "chevron_down.png";
     });
 
     focusBtn.addEventListener("click", () => {
