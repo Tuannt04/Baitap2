@@ -48,40 +48,57 @@ header .current-date .day-name:hover {
 header .dropdown-icon {
     width: 20px;
     height: 20px;
-    border: 1px solid #ffffff; /* Viền trắng như bạn yêu cầu */
+    border: 1px solid #ffffff;
     border-radius: 4px;
     cursor: pointer;
-    background-color: white; /* Nền đen theo yêu cầu trước */
-    display: flex; /* Căn giữa */
-    align-items: center; /* Căn dọc */
-    justify-content: center; /* Căn ngang */
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     object-fit: contain;
 }
 header .dropdown-icon img {
-    width: 32px; /* Điều chỉnh để khớp với container, thay vì 25px */
-    height: 32px; /* Điều chỉnh để khớp với container */
-    object-fit: contain; /* Đảm bảo hình ảnh hiển thị đầy đủ */
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
 }
 header .dropdown-icon:hover {
-    opacity: 0.7; /* Hiệu ứng mờ khi hover */
+    opacity: 0.7;
 }
 
-/* Điều hướng */
 .nav-controls {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 5px 15px;
     background: #252526;
 }
 .nav-controls .month-year {
     font-size: 1.0rem;
     font-weight: 600;
-    color: #bbb;
+    color: #ffffff; /* Màu chữ ban đầu là trắng, không đổi khi hover */
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    width: 120px; /* Thẻ div dài hơn */
+    cursor: pointer;
+    background: transparent; /* Nền trong suốt ban đầu */
+    transition: background-color 0.2s ease; /* Sửa lỗi: dùng background-color */
+}
+.nav-controls .month-year:hover {
+    background: #333; /* Nền nổi lên khi hover */
+    border-radius: 4px;
+}
+.nav-controls .month-year div {
+    text-align: left; /* Căn trái nội dung trong div */
+}
+.nav-controls .month-year p {
+    margin: 0;
 }
 .nav-controls .icons {
     display: flex;
     align-items: center;
-    gap: 4px; /* Khoảng cách giữa các nút */
+    gap: 4px;
 }
 .nav-controls .icons .caret-icon {
     width: 20px;
@@ -89,19 +106,19 @@ header .dropdown-icon:hover {
     border: 1px solid #3c3c3c;
     border-radius: 3px;
     cursor: pointer;
-    background-color: #000000; /* Nền đen cho container */
+    background-color: #000000;
     display: flex;
-    align-items: center; /* Căn dọc */
-    justify-content: center; /* Căn ngang */
+    align-items: center;
+    justify-content: center;
 }
 .nav-controls .icons .caret-icon img {
     width: 10px;
     height: 10px;
     object-fit: contain;
-    filter: brightness(0) invert(1); /* Đảo màu hình ảnh thành trắng */
+    filter: brightness(0) invert(1);
 }
 .nav-controls .icons .caret-icon:hover {
-    opacity: 0.7; /* Hiệu ứng mờ khi hover */
+    opacity: 0.7;
 }
 
 /* Container lịch */
@@ -109,7 +126,7 @@ header .dropdown-icon:hover {
     padding: 10px;
     background: #252526;
     overflow: hidden;
-    max-height: 400px;
+    min-height: 300px;
     position: relative;
 }
 .calendar ul {
@@ -269,7 +286,8 @@ header .dropdown-icon:hover {
 /* Điều khiển thời gian */
 .time-controls {
     display: flex;
-    justify-content: space-between; /* Đặt hai phần ở hai đầu */
+    justify-content: space-between;
+    align-items: center;
     padding: 8px;
     background: #1e1e1e;
     border-top: 1px solid #333;
@@ -277,7 +295,13 @@ header .dropdown-icon:hover {
 .time-controls .time-left {
     display: flex;
     align-items: center;
-    gap: 8px; /* Khoảng cách giữa - và 30 mins */
+    gap: 8px;
+}
+.time-controls .time-value {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    min-width: 40px;
+    text-align: center;
 }
 .time-controls button {
     background: #333;
@@ -290,6 +314,9 @@ header .dropdown-icon:hover {
 }
 .time-controls button:hover {
     background: #444;
+}
+.time-controls .stop-btn {
+    display: none;
 }
 
 /* Hiệu ứng trượt */
